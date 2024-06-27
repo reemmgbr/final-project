@@ -1,22 +1,30 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { TokenContext } from "../../Context/TokenContext";
 import { UserContext } from "../../Context/Usercontext";
+
 export default function Navbar() {
   let navigate = useNavigate();
   let { token, setToken } = useContext(TokenContext);
   let { user } = useContext(UserContext);
+
+  let [toggleNav, setToggleNav] = useState(false);
+
+  function toggleNavbar() {
+    setToggleNav(!toggleNav);
+  }
+
   function logout() {
     localStorage.removeItem("TokenLokal");
     navigate("/login");
 
     setToken(null);
   }
+
   return (
     <>
       <nav className="bg-[#F8F9FA] sticky dark:bg-gray-900  w-full z-20 top-0 right-0 left-0  border-b border-gray-200 dark:border-gray-600">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-          {/* <img src={"../../6a44ac78db7aa40fdb70b8bffc53bae9.jpg"} alt="" /> */}
           <Link
             to={""}
             className="flex items-center space-x-3 rtl:space-x-reverse text-3xl text-[#4D5963] my-3 "
@@ -28,11 +36,12 @@ export default function Navbar() {
           </Link>
           <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
             <button
+              onClick={toggleNavbar}
               data-collapse-toggle="navbar-sticky"
               type="button"
               className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
               aria-controls="navbar-sticky"
-              aria-expanded="false"
+              aria-expanded={toggleNav ? "true" : "false"}
             >
               <span className="sr-only">Open main menu</span>
               <svg
@@ -53,7 +62,9 @@ export default function Navbar() {
             </button>
           </div>
           <div
-            className="items-center grow justify-around hidden w-full md:flex md:w-auto md:order-1  "
+            className={`items-center grow justify-around w-full md:flex md:w-auto md:order-1 ${
+              toggleNav ? "" : "hidden"
+            }`}
             id="navbar-sticky"
           >
             <ul className="flex flex-col  p-4 md:p-0 mt-4 mx-8  font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0  dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
