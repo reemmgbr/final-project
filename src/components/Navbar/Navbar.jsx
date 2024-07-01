@@ -208,14 +208,14 @@ export default function Navbar() {
                         className="py-2 text-sm text-black  dark:text-black "
                         aria-labelledby="dropdownDefaultButton"
                       >
-                        <li>
+                        {/* <li>
                           <Link
                             to="/Yourprofile"
                             className="block px-4 py-2 hover:bg-green-500 dark:hover:bg-[#77D07 rounded8] dark:hover:text-white rounded"
                           >
                             Your Profile
                           </Link>
-                        </li>{" "}
+                        </li>{" "} */}
                         <li className="text-center w-full ">
                           <button
                             onClick={() => {
