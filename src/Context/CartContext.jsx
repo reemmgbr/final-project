@@ -7,6 +7,7 @@ export function CartContextProvider(props) {
   const [cartProducts, setCartProducts] = useState([]);
   const [totalitems, settotalitems] = useState(null);
   const [cartId, setcartId] = useState(null);
+  const [cartitems, setcartitems] = useState(0);
   //      Value        setValue   اغير / احط / اي حاجة
   const [totalprice, settotalprice] = useState(0);
   function addProductCart(productId) {
@@ -24,6 +25,7 @@ export function CartContextProvider(props) {
         settotalprice(data.data.data.totalCartPrice);
         data.data.data.totalCartPrice, "price";
         settotalitems(data.data.numOfCartItems);
+        setcartitems(data.data.numOfCartItems);
       })
       .catch((error) => {
         error;
@@ -38,6 +40,7 @@ export function CartContextProvider(props) {
         setCartProducts(data.data.data.products);
         settotalprice(data.data.data.totalCartPrice);
         settotalitems(data.data.numOfCartItems);
+        setcartitems(data.data.numOfCartItems);
 
         setcartId(data.data.data.cartOwner);
         data.data.data.cartOwner;
@@ -52,6 +55,7 @@ export function CartContextProvider(props) {
       .then((data) => {
         getCart();
         settotalprice(data.data.totalCartPrice);
+
         return data;
       })
       .catch((error) => {});
@@ -109,10 +113,18 @@ export function CartContextProvider(props) {
       .then((data) => {
         setCartProducts([]);
         toast.success("Successfully Deleted");
-
         return data;
       })
       .catch((error) => {});
+  }
+  async function getLoggedUserCart() {
+    try {
+      const data = await axios.get(
+        "https://ecommerce.routemisr.com/api/v1/cart",
+        { headers: { token: localStorage.getItem("TokenLokal") } }
+      );
+      setcartitems(data.data.numOfCartItems);
+    } catch (error) {}
   }
   return (
     <CartContext.Provider
@@ -127,6 +139,8 @@ export function CartContextProvider(props) {
         clearCart,
         totalitems,
         cartId,
+        getLoggedUserCart,
+        cartitems,
       }}
     >
       {props.children}

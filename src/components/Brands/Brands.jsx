@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import style from "./Brands.module.css";
 import axios from "axios";
 import Loading from "../Loading/Loading";

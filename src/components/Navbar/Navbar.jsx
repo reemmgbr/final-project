@@ -1,12 +1,13 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { TokenContext } from "../../Context/TokenContext";
 import { UserContext } from "../../Context/Usercontext";
-
+import { CartContext } from "./../../Context/CartContext";
 export default function Navbar() {
   let navigate = useNavigate();
   let { token, setToken } = useContext(TokenContext);
   let { user } = useContext(UserContext);
+  let { getLoggedUserCart, cartitems } = useContext(CartContext);
 
   let [toggleNav, setToggleNav] = useState(false);
 
@@ -20,6 +21,10 @@ export default function Navbar() {
 
     setToken(null);
   }
+
+  useEffect(() => {
+    getLoggedUserCart();
+  }, []);
 
   return (
     <>
@@ -151,12 +156,15 @@ export default function Navbar() {
                       </li>{" "}
                     </Link>
                   </ul>
-                  <li className="px-2">
+                  <li className="px-2 relative">
                     <NavLink
-                      to={"Cart"}
-                      className="block py-2 mx-10 md:mx-0 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:p-0  dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                      to={"/Cart"}
+                      className="block py-2 mx-10 md:mx-0 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:p-0 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                     >
-                      <i className="fa-solid fa-cart-shopping text-green-500 text-2xl"></i>
+                      <i className="fa-solid fa-cart-shopping text-black text-2xl"></i>{" "}
+                      <p className="absolute md:top-[-18px] md:right-[-2px]  right-[80%] top-[-20%] bg-green-500 text-white px-2 rounded-md">
+                        {cartitems}
+                      </p>
                     </NavLink>
                   </li>{" "}
                   <li className="px-2">

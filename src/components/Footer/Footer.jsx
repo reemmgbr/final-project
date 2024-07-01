@@ -170,7 +170,7 @@ export default function Footer() {
         </div>
         <div className="bg-gray-200">
           <div className="container px-5 py-4 mx-auto">
-            <p className="text-sm text-gray-700 capitalize xl:text-center font-bold pt-2">
+            <p className="text-sm text-gray-700 capitalize text-center font-bold pt-2">
               © 2024 All rights reserved
             </p>
           </div>
