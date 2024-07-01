@@ -24,7 +24,7 @@ import VerifyCode from "./VerifyCode/VerifyCode";
 import ResetPassword from "./ResetPassword/ResetPassword";
 import WishList from "./WishList/WishList";
 import SubCatagories from "./components/SubCatagories/SubCatagories";
-import yourprofile from "./components/Yourprofile/Yourprofile";
+// import yourprofile from "./components/Yourprofile/Yourprofile";
 import Yourprofile from "./components/Yourprofile/Yourprofile";
 import UserProfyleProvider from "./Context/Profyle";
 import UserContextProvider from "./Context/Usercontext";
