@@ -25,8 +25,8 @@ import ResetPassword from "./ResetPassword/ResetPassword";
 import WishList from "./WishList/WishList";
 import SubCatagories from "./components/SubCatagories/SubCatagories";
 // import yourprofile from "./components/Yourprofile/Yourprofile";
-import Yourprofile from "./components/Yourprofile/Yourprofile";
-import UserProfyleProvider from "./Context/Profyle";
+// import Yourprofile from "./components/Yourprofile/Yourprofile";
+// import UserProfyleProvider from "./Context/Profyle";
 import UserContextProvider from "./Context/Usercontext";
 function App() {
   let xx = new QueryClient();
@@ -97,14 +97,14 @@ function App() {
             </ProtectedRouts>
           ),
         },
-        {
-          path: "Yourprofile",
-          element: (
-            <ProtectedRouts>
-              <Yourprofile />
-            </ProtectedRouts>
-          ),
-        },
+        // {
+        //   path: "Yourprofile",
+        //   element: (
+        //     <ProtectedRouts>
+        //       <Yourprofile />
+        //     </ProtectedRouts>
+        //   ),
+        // },
         {
           path: "WishList",
           element: (
@@ -142,17 +142,15 @@ function App() {
   return (
     <>
       <UserContextProvider>
-        <UserProfyleProvider>
-          <CartContextProvider>
-            <QueryClientProvider client={xx}>
-              <ReactQueryDevtools initialIsOpen={false} />
-              <TokenContextProvider>
-                <RouterProvider router={routs} />
-                <Toaster position="bottom-left" reverseOrder={false} />
-              </TokenContextProvider>
-            </QueryClientProvider>
-          </CartContextProvider>
-        </UserProfyleProvider>
+        <CartContextProvider>
+          <QueryClientProvider client={xx}>
+            <ReactQueryDevtools initialIsOpen={false} />
+            <TokenContextProvider>
+              <RouterProvider router={routs} />
+              <Toaster position="bottom-left" reverseOrder={false} />
+            </TokenContextProvider>
+          </QueryClientProvider>
+        </CartContextProvider>
       </UserContextProvider>
     </>
   );
